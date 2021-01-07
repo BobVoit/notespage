@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SignUpForm from './SignUpForm';
-
+import style from './SignUp.module.css';
 
 const SignUp = (props) => {
     return (
-        <div>
+        <div className={style.signup__container}>
             <SignUpForm />
         </div>
     )
