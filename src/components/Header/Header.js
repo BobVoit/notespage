@@ -3,7 +3,10 @@ import React from 'react';
 import style from './Header.module.css';
 import MenuIcon from '@material-ui/icons/Menu';
 import { withStyles } from '@material-ui/core/styles';
-
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { logout } from '../../redux/userReducer';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = theme => ({
     root: {
@@ -21,11 +24,17 @@ const useStyles = theme => ({
     button: {
         color: "#000",
         backgroundColor: "#fff"
-    }
+    },
+
 })
 
 
 class Header extends React.Component {
+
+    logout = () => {
+        this.props.logout(this.props.token)
+    }
+
     render() {
         const { classes } = this.props;
         return (
@@ -37,10 +46,33 @@ class Header extends React.Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" className={classes.title}>Your Notes</Typography>
-                        <Box mr={3}> 
-                            <Button color="inherit" variant="outlined">Log In</Button>
-                        </Box>
-                        <Button className={classes.button} color="inherit" variant="contained">Sign Up</Button>
+                        {!this.props.isAuth 
+                        ? <>
+                            <Box mr={3}> 
+                                <Button  
+                                    to="/login"
+                                    component={NavLink} 
+                                    color="inherit" 
+                                    variant="outlined"
+                                >Log In</Button>
+                            </Box>
+                            <Button 
+                                to="/signup"
+                                component={NavLink} 
+                                className={classes.button} 
+                                color="inherit"
+                                variant="contained"
+                            >Sign Up</Button>
+                        </>
+                        : <>
+                            <Box mr={1}>
+                                <Typography >{this.props.nickname}</Typography>
+                            </Box>
+                            <Box mr={3}> 
+                                <Button onClick={this.logout} color="inherit" variant="outlined">Sign Out</Button>
+                            </Box>
+                        </>
+                        }
                     </Toolbar>
                 </Container>
             </AppBar>
@@ -48,5 +80,13 @@ class Header extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => ({
+    isAuth: state.user.isAuth,
+    nickname: state.user.nickname, 
+    token: state.user.token
+})
 
-export default withStyles(useStyles)(Header);
+export default compose(
+    connect(mapStateToProps, {
+        logout
+    }), withStyles(useStyles) )(Header);

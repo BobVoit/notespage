@@ -19,7 +19,7 @@ const userReducer = (state = initialState, action) => {
         case SET_USER_DATA: {
             return {
                 ...state,
-                id: action.id,
+                id: Number(action.id),
                 login: action.login,
                 nickname: action.nickname,
                 token: action.token,
