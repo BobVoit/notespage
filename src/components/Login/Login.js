@@ -4,11 +4,16 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
 import style from './Login.module.css';
+import { login } from '../../redux/userReducer';
 
 const Login = (props) => {
+    const onSubmit = (formData) => {
+        props.login(formData.login, formData.password);
+    }
+
     return (
         <div className={style.login__container}>
-            <LoginForm />
+            <LoginForm onSubmit={onSubmit} />
         </div>
     )
 }
@@ -24,5 +29,5 @@ const mapStateToProps = (state) => ({
 
 
 export default connect(mapStateToProps, {
-
+    login,
 })(Login);
