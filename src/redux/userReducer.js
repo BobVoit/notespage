@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 
 const SET_USER_DATA = 'SET_USER_DATA'; 
 const SET_iS_SIGN_UP = 'SET_iS_SIGN_UP';
+const SET_AVATAR = 'SET_AVATAR';
 
 
 let initialState = {
@@ -34,6 +35,12 @@ const userReducer = (state = initialState, action) => {
                 isSignUp: action.isSignUp
             }
         }
+        case SET_AVATAR: {
+            return {
+                ...state,
+                avatar: action.avatar
+            }
+        }
         default:
             return state;
     }
@@ -49,6 +56,11 @@ export const setSignUp = (isSignUp) => ({
     type: SET_iS_SIGN_UP,
     isSignUp
 }) 
+
+export const setAvatar = (avatar) => ({
+    type: SET_AVATAR,
+    avatar
+})
 
 export const signUp = (login, password, nickname) => async (dispatch) => {
     let response = await userAPI.signUp(login, password, nickname);
@@ -67,7 +79,6 @@ export const getUserByToken = (token) => async (dispatch) => {
 
 export const login = (login, password) => async (dispatch) => {
     let response = await userAPI.login(login, password);
-    console.log(response.data.result);
     if (response.data.result === 'ok') {
         dispatch(getUserByToken(response.data.data));
         Cookies.set('token', response.data.data, { expires: 2 });

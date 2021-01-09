@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
-import style from './Login.module.css';
 import { login } from '../../redux/userReducer';
 
 const Login = (props) => {
@@ -16,7 +15,7 @@ const Login = (props) => {
     }
 
     return (
-        <div className={style.login__container}>
+        <div >
             <LoginForm onSubmit={onSubmit} />
         </div>
     )

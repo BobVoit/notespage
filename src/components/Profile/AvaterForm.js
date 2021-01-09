@@ -1,0 +1,47 @@
+import React from 'react';
+import { Input, Button, Dialog, DialogTitle, DialogContent, Box } from '@material-ui/core';
+import { Field, reduxForm } from 'redux-form';
+import { makeStyles } from '@material-ui/core/styles';
+import { FieldFileInput } from '../common/FormsControl/FormsControl';
+
+const useStyles = makeStyles(theme => ({
+    cancelWrapper: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
+
+    },
+    submit: {
+        marginLeft: theme.spacing(4),
+        color : "#fff",
+        backgroundColor: "#000",
+    },
+    cancel: {
+        marginTop: theme.spacing(1)
+    }
+}))
+
+const AvatarForm = (props) =>  {
+
+    const classes = useStyles();
+
+    return (
+        <Dialog open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-set-ava">
+            <DialogTitle id="form-dialog-set-ava">Set avatar</DialogTitle>
+            <DialogContent>
+                <form onSubmit={props.handleSubmit} >
+                    <Field name={"ava"} type="text" component={FieldFileInput} />
+                    <Button className={classes.submit}  type="submit" variant="contained">Set avatar</Button>
+                </form>
+                <Box className={classes.cancelWrapper}>
+                    <Button size="small" className={classes.cancel} onClick={props.handleClose} variant="outlined">Cancel</Button>
+                </Box>
+            </DialogContent>
+        </Dialog>
+    )
+}
+
+
+export default reduxForm({
+    form: "avatar"
+})(AvatarForm);

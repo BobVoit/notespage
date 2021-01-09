@@ -1,7 +1,5 @@
-import { AppBar, Button, Container, IconButton, Toolbar, Typography, Box, Avatar } from '@material-ui/core';
+import { AppBar, Button, Container, Toolbar, Typography, Box, Avatar } from '@material-ui/core';
 import React from 'react';
-import style from './Header.module.css';
-import MenuIcon from '@material-ui/icons/Menu';
 import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -31,6 +29,9 @@ const useStyles = theme => ({
         backgroundColor: "#fff",
         color: "#000",
         fontWeight: "700"
+    },
+    linkProfile: {
+        color: "#fff",
     }
 })
 
@@ -69,7 +70,11 @@ class Header extends React.Component {
                         </>
                         : <>
                             <Box mr={1}>
-                                <Typography >{this.props.nickname}</Typography>
+                                <Typography>
+                                    <Button className={classes.linkProfile} component={NavLink} to="/profile">
+                                        {this.props.nickname}
+                                    </Button>
+                                </Typography>
                             </Box>
                             <Box mr={3}> 
                                 <Button onClick={this.logout} color="inherit" variant="outlined">Sign Out</Button>

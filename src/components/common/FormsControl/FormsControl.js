@@ -1,6 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import styled from 'styled-components';
+import InputMU from '@material-ui/core/Input';
 
 const ErrorMessage = styled.span`
     color: #ff0000;
@@ -20,3 +21,32 @@ export const Input = ({input, meta, ...props}) => {
         </div>
     )
 }
+
+
+export class FieldFileInput extends React.Component{
+    constructor(props) {
+      super(props);
+      this.onChange = this.onChange.bind(this);
+    }
+  
+    onChange(e) {
+      const { input: { onChange } } = this.props;
+      onChange(e.target.files[0]);
+    }
+  
+    render(){
+      const { input: { value } } = this.props
+      const { input,label, required, meta } = this.props  //whatever props you send to the component from redux-form Field
+      return(
+       <div><label>{label}</label>
+       <div>
+         <InputMU
+          type='file'
+          accept='.jpg, .png, .jpeg'
+          onChange={this.onChange}
+         />
+       </div>
+       </div>
+      )
+  }
+  }
