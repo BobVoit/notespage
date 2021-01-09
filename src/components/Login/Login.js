@@ -11,6 +11,10 @@ const Login = (props) => {
         props.login(formData.login, formData.password);
     }
 
+    if (props.isAuth) {
+        return <Redirect to="/profile" />
+    }
+
     return (
         <div className={style.login__container}>
             <LoginForm onSubmit={onSubmit} />

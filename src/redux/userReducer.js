@@ -1,4 +1,5 @@
 import { userAPI } from '../api/api';
+import Cookies from 'js-cookie';
 
 const SET_USER_DATA = 'SET_USER_DATA'; 
 const SET_iS_SIGN_UP = 'SET_iS_SIGN_UP';
@@ -10,7 +11,8 @@ let initialState = {
     nickname: null,
     token: null,
     isAuth: false,
-    isSignUp: false
+    isSignUp: false,
+    avatar: null,
 }
 
 
@@ -65,14 +67,17 @@ export const getUserByToken = (token) => async (dispatch) => {
 
 export const login = (login, password) => async (dispatch) => {
     let response = await userAPI.login(login, password);
+    console.log(response.data.result);
     if (response.data.result === 'ok') {
         dispatch(getUserByToken(response.data.data));
+        Cookies.set('token', response.data.data, { expires: 2 });
     }
 }
 
 export const logout = (token) => async (dispatch) => {
     let response = await userAPI.logout(token);
     if (response.data.result === 'ok') {
+        Cookies.remove('token');
         dispatch(setUserData(null, null, null, null, false));
     }
 }

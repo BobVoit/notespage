@@ -59,7 +59,7 @@ const SignUpForm = (props) => {
             <Typography component="h1" variant="h5">Sign Up</Typography>
             <form className={classes.form} onSubmit={props.handleSubmit}>
                 <Field validate={[required, maxLengthLogin30, minLengthLogin3]}
-                    placeholder={"Login"} name={"login"} component={Input} />
+                    autoFocus placeholder={"Login"} name={"login"} component={Input} />
                 <Field validate={[required, minLengthPassword5]}
                     type={"Password"} placeholder={"password"} name={"password"} component={Input} />
                 <Field validate={[required, minLengthNickname3]}

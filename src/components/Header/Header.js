@@ -1,4 +1,4 @@
-import { AppBar, Button, Container, IconButton, Toolbar, Typography, Box } from '@material-ui/core';
+import { AppBar, Button, Container, IconButton, Toolbar, Typography, Box, Avatar } from '@material-ui/core';
 import React from 'react';
 import style from './Header.module.css';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { logout } from '../../redux/userReducer';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const useStyles = theme => ({
     root: {
@@ -25,7 +26,12 @@ const useStyles = theme => ({
         color: "#000",
         backgroundColor: "#fff"
     },
-
+    logo: {
+        marginRight: theme.spacing(1),
+        backgroundColor: "#fff",
+        color: "#000",
+        fontWeight: "700"
+    }
 })
 
 
@@ -38,13 +44,10 @@ class Header extends React.Component {
     render() {
         const { classes } = this.props;
         return (
-            <AppBar position="fixed" className={classes.header}>
+            <AppBar position="relative" className={classes.header}>
                 <Container fixed>
                     <Toolbar>
-                        <IconButton edge="start" className={classes.menuButton}
-                        color="inherit" aria-label="menu">
-                            <MenuIcon />
-                        </IconButton>
+                        <Avatar className={classes.logo}>YN</Avatar>
                         <Typography variant="h6" className={classes.title}>Your Notes</Typography>
                         {!this.props.isAuth 
                         ? <>
@@ -86,7 +89,13 @@ const mapStateToProps = (state) => ({
     token: state.user.token
 })
 
+Header.propTypes = {
+    isAuth: PropTypes.bool,
+    nickname: PropTypes.string,
+    token: PropTypes.string
+}
+
 export default compose(
     connect(mapStateToProps, {
         logout
-    }), withStyles(useStyles) )(Header);
+    }), withStyles(useStyles))(Header);

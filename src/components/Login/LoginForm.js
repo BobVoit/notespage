@@ -61,7 +61,7 @@ const LoginForm = (props) => {
                 <Typography component="h1" variant="h5">Log In</Typography>
                 <form className={classes.form} onSubmit={props.handleSubmit}>
                     <Field validate={[required, maxLengthLogin30, minLengthLogin3]}
-                        placeholder={"Login"}  name={"login"} component={Input} />
+                        autoFocus placeholder={"Login"}  name={"login"} component={Input} />
                     <Field validate={[required, minLengthPassword5]}
                         placeholder={"Password"} name={"password"} type={'password'} component={Input} />
                     <Button fullWidth className={classes.submit} type="submit" variant="contained">Log In</Button>
