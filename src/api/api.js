@@ -1,5 +1,5 @@
 import * as axios from "axios";
-
+import formData from 'form-data';
 
 export const userAPI = {
     signUp(login, password, nickname) {
@@ -41,5 +41,27 @@ export const userAPI = {
                 token
             }
         })
+    },
+    setUserAvatar(avatar, token) {
+        let data = new FormData();
+        data.append('token', token);
+        data.append('avatar', avatar, avatar.name);
+        data.append ('method', 'setuseravater');
+        // return axios({
+        //     method: 'POST',
+        //     url: "http://proger25/api/index.php?",
+        //     headers: {'Content-Type': 'multipart/form-data'},
+        //     params: {
+        //         method: 'setuseravater',
+        //         avatar, token
+        //     }
+        // })
+        return axios.post("http://proger25/api/index.php?", data, { 
+            headers: {
+                'accept': 'application/json',
+                'Accept-Language': 'en-US,en;q=0.8',
+                'Content-Type': `multipart/form-data;`,
+            }
+        });
     }
 }

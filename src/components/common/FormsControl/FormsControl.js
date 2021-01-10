@@ -34,7 +34,7 @@ export class FieldFileInput extends React.Component{
       onChange(e.target.files[0]);
     }
   
-    render(){
+    render() {
       const { input: { value } } = this.props
       const { input,label, required, meta } = this.props  //whatever props you send to the component from redux-form Field
       return(
@@ -48,5 +48,5 @@ export class FieldFileInput extends React.Component{
        </div>
        </div>
       )
-  }
-  }
+   }
+}

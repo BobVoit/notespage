@@ -11,6 +11,9 @@ const useStyles = theme => ({
     paper: {
         height: 140,
     },
+    openDialogWindow: {
+        marginTop: theme.spacing(1),
+    },
     avaName: {
         display: 'flex',
         alignItems: 'center'

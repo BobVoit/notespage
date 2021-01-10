@@ -93,6 +93,13 @@ export const logout = (token) => async (dispatch) => {
     }
 }
 
+export const setUserAvatar = (avatar, token) => async (dispatch) => {
+    let response = await userAPI.setUserAvatar(avatar, token);
+    if (response.data.result === 'ok') {
+        console.log(response.data.result);
+    }
+}
+
 
 
 export default userReducer;

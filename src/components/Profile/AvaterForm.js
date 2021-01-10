@@ -11,6 +11,9 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'flex-end'
 
     },
+    form: {
+        display: 'flex',      
+    },
     submit: {
         marginLeft: theme.spacing(4),
         color : "#fff",
@@ -29,9 +32,9 @@ const AvatarForm = (props) =>  {
         <Dialog open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-set-ava">
             <DialogTitle id="form-dialog-set-ava">Set avatar</DialogTitle>
             <DialogContent>
-                <form onSubmit={props.handleSubmit} >
+                <form className={classes.form} onSubmit={props.handleSubmit} >
                     <Field name={"ava"} type="text" component={FieldFileInput} />
-                    <Button className={classes.submit}  type="submit" variant="contained">Set avatar</Button>
+                    <Button className={classes.submit} onClick={props.handleClose}  type="submit" variant="contained">Set avatar</Button>
                 </form>
                 <Box className={classes.cancelWrapper}>
                     <Button size="small" className={classes.cancel} onClick={props.handleClose} variant="outlined">Cancel</Button>
