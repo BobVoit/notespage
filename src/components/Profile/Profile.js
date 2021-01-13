@@ -3,11 +3,13 @@ import { Container, CssBaseline, Box, Typography, Grid, Button, Card, CardConten
 import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import AvatarForm from './AvaterForm';
 import useStyles from './styleProfile';
 import { setUserAvatar } from '../../redux/userReducer';
 import PropTypes from 'prop-types';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import Notes from './Notes/Notes';
 
 class Profile extends React.Component {
     constructor(props) {
@@ -15,6 +17,18 @@ class Profile extends React.Component {
         this.state = {
             open: false,
         }
+    }
+
+    componentDidMount() {
+        let id = this.props.match.params.id;
+        console.log(this.props);
+        if (!id) {
+            id = this.props.id;
+            if (!id) {
+                this.props.history.push("/login");
+            }
+        }
+        console.log(this.props.id);
     }
 
     onSubmit = (formData) => {
@@ -30,7 +44,7 @@ class Profile extends React.Component {
         // }
         console.log(formData.ava);
         if (formData.ava) {
-            this.props.setUserAvatar(formData.ava, this.props.token);
+            this.props.setUserAvatar(formData.ava, this.props.id);
         }
     }
 
@@ -46,8 +60,6 @@ class Profile extends React.Component {
         const { classes } = this.props;
 
         return (
-            <>
-            {!this.props.isAuth && <Redirect to="/login" />}
             <Container component="main" maxWidth="md" className={classes.root}>
                 <CssBaseline />
                 <div className={classes.content}>
@@ -75,11 +87,11 @@ class Profile extends React.Component {
                             </Card>
                         </Grid>
                         <Grid item xs={6}>
+                            <Notes />
                         </Grid>
                     </Grid>
                 </div>
             </Container>
-            </>
         )
     }
 }   
@@ -95,13 +107,15 @@ const mapStateToProps = (state) => ({
     nickname: state.user.nickname,
     avatar: state.user.avatar,
     isAuth: state.user.isAuth,
-    token: state.user.token
+    id: state.user.id,
 })
 
 
 export default compose(
+    withStyles(useStyles),
     connect(mapStateToProps, {
         setUserAvatar
     }),
-    withStyles(useStyles),
+    withRouter,
+    withAuthRedirect
 )(Profile);

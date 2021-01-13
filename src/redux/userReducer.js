@@ -93,10 +93,19 @@ export const logout = (token) => async (dispatch) => {
     }
 }
 
-export const setUserAvatar = (avatar, token) => async (dispatch) => {
-    let response = await userAPI.setUserAvatar(avatar, token);
+export const getUserAvatar = (id) => async (dispatch) => {
+    let response = await userAPI.getUserAvatar(id);
+    console.log(response);
     if (response.data.result === 'ok') {
-        console.log(response.data.result);
+        dispatch(setAvatar(response.data.data.image));
+    }
+} 
+
+export const setUserAvatar = (avatar, id) => async (dispatch) => {
+    let response = await userAPI.setUserAvatar(avatar, id);
+    console.log(response);
+    if (response.data.result === 'ok') {
+        dispatch(getUserAvatar(id));
     }
 }
 

@@ -29,6 +29,7 @@ export const initializeApp = () => (dispatch) => {
     let token = Cookies.get('token');
     if (token) {
         dispatch(getUserByToken(token));
+        dispatch(initializedSuccess());
     }
 }
 

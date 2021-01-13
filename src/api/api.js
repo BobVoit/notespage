@@ -1,5 +1,5 @@
 import * as axios from "axios";
-import formData from 'form-data';
+import FormData from 'form-data';
 
 export const userAPI = {
     signUp(login, password, nickname) {
@@ -42,20 +42,11 @@ export const userAPI = {
             }
         })
     },
-    setUserAvatar(avatar, token) {
+    setUserAvatar(avatar, id) {
         let data = new FormData();
-        data.append('token', token);
+        data.append('id', id);
         data.append('avatar', avatar, avatar.name);
         data.append ('method', 'setuseravater');
-        // return axios({
-        //     method: 'POST',
-        //     url: "http://proger25/api/index.php?",
-        //     headers: {'Content-Type': 'multipart/form-data'},
-        //     params: {
-        //         method: 'setuseravater',
-        //         avatar, token
-        //     }
-        // })
         return axios.post("http://proger25/api/index.php?", data, { 
             headers: {
                 'accept': 'application/json',
@@ -63,5 +54,15 @@ export const userAPI = {
                 'Content-Type': `multipart/form-data;`,
             }
         });
+    },
+    getUserAvatar(id) {
+        return axios({
+            method: 'GET',
+            url: "http://proger25/api/index.php?",
+            params: {
+                method: "getuseravatar",
+                id
+            }
+        })
     }
 }
