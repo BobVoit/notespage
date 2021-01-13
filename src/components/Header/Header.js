@@ -71,7 +71,7 @@ class Header extends React.Component {
                         : <>
                             <Box mr={1}>
                                 <Typography>
-                                    <Button className={classes.linkProfile} component={NavLink} to="/profile">
+                                    <Button className={classes.linkProfile} component={NavLink} to="/mainpage">
                                         {this.props.nickname}
                                     </Button>
                                 </Typography>

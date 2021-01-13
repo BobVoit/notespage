@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Dialog, DialogTitle, DialogContent, Box } from '@material-ui/core';
 import { Field, reduxForm } from 'redux-form';
 import { makeStyles } from '@material-ui/core/styles';
-import { FieldFileInput } from '../common/FormsControl/FormsControl';
+import { FieldFileInput } from '../../common/FormsControl/FormsControl';
 
 const useStyles = makeStyles(theme => ({
     cancelWrapper: {

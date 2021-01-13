@@ -2,18 +2,16 @@ import React from 'react';
 import { Card, CardContent } from '@material-ui/core';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/styles';
-
+import Note from './Note';
 
 const useStyles = theme => ({
     root: {
-        height: "100%"
+        height: "100%",
     }
 });
 
 
 class Notes extends React.Component {
-
-
 
 
     render() {
@@ -22,7 +20,7 @@ class Notes extends React.Component {
         return (
             <Card className={classes.root}>
                 <CardContent>
-                    
+                    {this.props.notes.map(note => <Note title={note.title} message={note.message} />)}
                 </CardContent>
             </Card>
         )
