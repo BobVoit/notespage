@@ -23,6 +23,25 @@ export const Input = ({input, meta, ...props}) => {
 }
 
 
+export const TextArea = ({input, meta, ...props}) => {
+  const hasError = meta.touched && meta.error;
+  return (
+      <div className={"form-controls" + " " + (hasError ? "form-controls__error" : "")}>
+          <div>
+              <TextField {...input} {...props} 
+              margin="normal" required 
+              variant="outlined" 
+              rows={2}
+              multiline
+              label={props.labelName}
+              fullWidth />
+          </div>
+          { hasError && <ErrorMessage>{meta.error}</ErrorMessage> } 
+      </div>
+  )
+}
+
+
 export class FieldFileInput extends React.Component{
     constructor(props) {
       super(props);

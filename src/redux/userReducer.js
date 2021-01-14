@@ -4,7 +4,9 @@ import Cookies from 'js-cookie';
 const SET_USER_DATA = 'SET_USER_DATA'; 
 const SET_iS_SIGN_UP = 'SET_iS_SIGN_UP';
 const SET_AVATAR = 'SET_AVATAR';
-
+const SET_NOTES = 'SET_NOTES';
+const SET_ONE_NOTE = 'SET_ONE_NOTE';
+const DELETE_NOTE = 'DELETE_NOTE';
 
 let initialState = {
     id: null,
@@ -14,6 +16,7 @@ let initialState = {
     isAuth: false,
     isSignUp: false,
     avatar: null,
+    notes: null
 }
 
 
@@ -41,11 +44,28 @@ const userReducer = (state = initialState, action) => {
                 avatar: action.avatar
             }
         }
+        case SET_NOTES: {
+            return {
+                ...state,
+                notes: action.notes
+            }
+        }
+        case SET_ONE_NOTE: {
+            return {
+                ...state,
+                notes: [...state.notes, action.note]
+            }
+        }
+        case DELETE_NOTE: {
+            return {
+                ...state,
+                notes: [...state.notes.filter(note => note.id !== action.noteId)]
+            }
+        }
         default:
             return state;
     }
 }
-
 
 export const setUserData = (id, login, nickname, token, isAuth) => ({
     type: SET_USER_DATA,
@@ -61,6 +81,22 @@ export const setAvatar = (avatar) => ({
     type: SET_AVATAR,
     avatar
 })
+
+export const setNotes = (notes) => ({
+    type: SET_NOTES,
+    notes
+})
+
+export const setOneNote = (note) => ({
+    type: SET_ONE_NOTE,
+    note
+})
+
+export const deleteNoteFromState = (noteId) => ({
+    type: DELETE_NOTE,
+    noteId
+})
+
 
 export const signUp = (login, password, nickname) => async (dispatch) => {
     let response = await userAPI.signUp(login, password, nickname);
@@ -109,6 +145,29 @@ export const setUserAvatar = (avatar, id) => async (dispatch) => {
     }
 }
 
+export const addNote = (id, title, message) => async (dispatch) => {
+    let response = await userAPI.addNote(id, title, message);
+    let data = response.data.data;
+    if (response.data.result === 'ok') {
+        dispatch(setOneNote(data));
+    }
+}
+
+export const getAllNotes = (id) => async (dispatch) => {
+    let response = await userAPI.getAllNotes(id);
+    let data = response.data.data;
+    if (response.data.result === 'ok') {
+        dispatch(setNotes(data));
+    }
+}
+
+
+export const deleteNote = (noteId) => async (dispatch) => {
+    let response = await userAPI.deleteNote(noteId);
+    if (response.data.result === 'ok') {
+        dispatch(deleteNoteFromState(noteId));
+    }
+}
 
 
 export default userReducer;

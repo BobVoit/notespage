@@ -10,46 +10,27 @@ import PropTypes from 'prop-types';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import Profile from './Profile/Profile';
 import Notes from './Notes/Notes';
+import { getAllNotes, addNote, deleteNote } from '../../redux/userReducer';
 
 class MainPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             open: false,
-        }
-
-        this.notes = [
-            {
-                id: 1,
-                title: "Вчера",
-                message: "Купил новый автомобиль"
-            },
-            {
-                id: 2,
-                title: "Вчера",
-                message: "Купил новый автомобиль"
-            },
-            {
-                id: 3,
-                title: "Вчера",
-                message: "Купил новый автомобиль"
-            },
-           
-        ];
+        }           
     }
 
 
 
     componentDidMount() {
         let id = this.props.match.params.id;
-        console.log(this.props);
         if (!id) {
             id = this.props.id;
             if (!id) {
                 this.props.history.push("/login");
             }
         }
-        console.log(this.props.id);
+        
     }
 
     render() {
@@ -62,7 +43,11 @@ class MainPage extends React.Component {
                     <Grid container spacing={2} direction="row" justify="center">
                         <Grid item xs={8}>
                             <Notes 
-                                notes={this.notes}
+                                notes={this.props.notes}
+                                getAllNotes={this.props.getAllNotes}
+                                userId={this.props.id}
+                                addNote={this.props.addNote}
+                                deleteNote={this.props.deleteNote}
                             />
                         </Grid>
                         <Grid item xs={4}>
@@ -91,13 +76,17 @@ const mapStateToProps = (state) => ({
     avatar: state.user.avatar,
     isAuth: state.user.isAuth,
     id: state.user.id,
+    notes: state.user.notes,
 })
 
 
 export default compose(
     withStyles(useStyles),
     connect(mapStateToProps, {
-        setUserAvatar
+        setUserAvatar,
+        getAllNotes, 
+        addNote,
+        deleteNote
     }),
     withRouter,
     withAuthRedirect

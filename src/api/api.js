@@ -64,5 +64,35 @@ export const userAPI = {
                 id
             }
         })
+    },
+    addNote(id, title, message) {
+        return axios({
+            method: 'POST',
+            url: "http://proger25/api/index.php?",
+            params: {
+                method: "addnote",
+                id, title, message
+            }
+        })
+    },
+    getAllNotes(id) {
+        return axios({
+            method: 'GET',
+            url: "http://proger25/api/index.php?",
+            params: {
+                method: "getallnotes",
+                id
+            }
+        })
+    },
+    deleteNote(note_id) {
+        return axios({
+            method: 'GET',
+            url: "http://proger25/api/index.php?",
+            params: {
+                method: "deletenote",
+                note_id
+            }
+        })
     }
 }
