@@ -4,7 +4,10 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        marginBottom: theme.spacing(1)
+        marginBottom: theme.spacing(1),
+        [theme.breakpoints.down("xs")]: {
+            fontSize: theme.spacing(2)
+        }
     },
     content: {
         paddingLeft: theme.spacing(2),

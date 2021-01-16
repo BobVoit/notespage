@@ -77,11 +77,12 @@ export const setSignUp = (isSignUp) => ({
     isSignUp
 }) 
 
-export const setAvatar = (avatar) => ({
+export const setAvatar = (avatar) => {
+    console.log(avatar);
+    return {
     type: SET_AVATAR,
     avatar
-})
-
+}}
 export const setNotes = (notes) => ({
     type: SET_NOTES,
     notes
@@ -110,6 +111,7 @@ export const getUserByToken = (token) => async (dispatch) => {
     const data = response.data.data;
     if (response.data.result === 'ok') {
         dispatch(setUserData(data.id, data.login, data.nickname, data.token, true));
+        dispatch(getUserAvatar(data.id));
     }
 }
 
@@ -133,7 +135,9 @@ export const getUserAvatar = (id) => async (dispatch) => {
     let response = await userAPI.getUserAvatar(id);
     console.log(response);
     if (response.data.result === 'ok') {
-        dispatch(setAvatar(response.data.data.image));
+        dispatch(setAvatar(response.data.data));
+    } else {
+        dispatch(setAvatar(null));
     }
 } 
 

@@ -2,7 +2,6 @@ import React from 'react';
 import { TextArea, Input } from '../../common/FormsControl/FormsControl';
 import { Box, Button } from '@material-ui/core';
 import { Field, reduxForm } from 'redux-form';
-import { required } from '../../../utils/validators/validators';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -15,13 +14,16 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: "#000",
         '&:hover': {
             color: "#000"
-        }
+        },
+        paddingLeft: theme.spacing(5),
+        paddingRight: theme.spacing(5)
     }
 }))
 
 const NotesForm = (props) => {
 
     const classes = useStyles();
+    
 
     return (
         <form onSubmit={props.handleSubmit}>

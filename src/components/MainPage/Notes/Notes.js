@@ -4,12 +4,20 @@ import { compose } from 'redux';
 import { withStyles } from '@material-ui/styles';
 import Note from './Note';
 import NotesForm from './NotesForm';
+import Preloader from '../../common/Preloader/Preloader';
+import { reset } from 'redux-form'; 
  
 const useStyles = theme => ({
     root: {
-        minHeight: "25vw",
-        maxHeight: "25vw",
+        flexGrow: 1,
+        minHeight: 400,
+        maxHeight: 400,
         overflow: "auto"
+    },
+    preloader: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     }
 });
 
@@ -21,13 +29,22 @@ class Notes extends React.Component {
         this.props.getAllNotes(this.props.userId);
     }
 
-    addNote = (formData) => {
+    addNote = (formData, dispatch) => {
         this.props.addNote(this.props.userId, formData.title, formData.message);
+        dispatch(reset("notesAddNote"));
     }
 
 
     render() {
         const { classes } = this.props;
+
+        if (this.props.notes === null) {
+            return (
+                <Box className={classes.preloader}> 
+                    <Preloader />
+                </Box>
+            )
+        }
 
         return (
             <>

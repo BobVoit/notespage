@@ -1,16 +1,15 @@
 import React from 'react';
-import { Container, CssBaseline, Box, Typography, Grid, Button, Card, CardContent, Avatar } from '@material-ui/core';
+import { Container, CssBaseline, Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import useStyles from './styleProfile';
-import { setUserAvatar } from '../../redux/userReducer';
 import PropTypes from 'prop-types';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import Profile from './Profile/Profile';
 import Notes from './Notes/Notes';
-import { getAllNotes, addNote, deleteNote } from '../../redux/userReducer';
+import { getAllNotes, addNote, deleteNote, setUserAvatar } from '../../redux/userReducer';
 
 class MainPage extends React.Component {
     constructor(props) {
@@ -40,20 +39,22 @@ class MainPage extends React.Component {
             <Container component="main" maxWidth="md" className={classes.root}>
                 <CssBaseline />
                 <div className={classes.content}>
-                    <Grid container spacing={2} direction="row" justify="center">
-                        <Grid item xs={8}>
+                    <Grid wrap="wrap" container spacing={2} direction="row" justify="center">
+                        <Grid xs={12} sm={12} item md={4}>
+                            <Profile
+                                avatar={this.props.avatar}
+                                nickname={this.props.nickname}
+                                setUserAvatar={this.props.setUserAvatar}
+                                id={this.props.id}
+                            />
+                        </Grid>
+                        <Grid xs={12} sm={12} item md={8}>
                             <Notes 
                                 notes={this.props.notes}
                                 getAllNotes={this.props.getAllNotes}
                                 userId={this.props.id}
                                 addNote={this.props.addNote}
                                 deleteNote={this.props.deleteNote}
-                            />
-                        </Grid>
-                        <Grid item xs={4}>
-                            <Profile
-                                avatar={this.props.avatar}
-                                nickname={this.props.nickname}
                             />
                         </Grid>
                     </Grid>
@@ -67,7 +68,8 @@ MainPage.propTypes = {
     nickname: PropTypes.string,
     isAuth: PropTypes.bool,
     token: PropTypes.string,
-    avatar: PropTypes.string
+    avatar: PropTypes.string,
+    id: PropTypes.number,
 }
 
 

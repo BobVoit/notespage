@@ -6,9 +6,10 @@ import AvatarForm from './AvaterForm';
 
 const useStyles = makeStyles(theme => ({
     profileInfo: {
-        paddingBottom: theme.spacing(12),
-        paddingLeft: theme.spacing(8),
-        paddingRight: theme.spacing(8),
+        paddingBottom: theme.spacing(3),   
+        paddingTop: theme.spacing(3),
+        // paddingLeft: theme.spacing(8),
+        // paddingRight: theme.spacing(8),
     },
     avatar: {
         height: theme.spacing(12),
@@ -32,14 +33,13 @@ const Profile = (props) => {
         //         let reader = new FileReader();
         //         reader.onload = () => {
         //             let dataURL = reader.result;
-        //             this.props.setUserAvatar(dataURL, this.props.token);
+        //             props.setUserAvatar(dataURL, props.id);
         //         }
         //         reader.readAsDataURL(formData.ava);
         //     }
         // }
-        console.log(formData.ava);
         if (formData.ava) {
-            this.props.setUserAvatar(formData.ava, this.props.id);
+            props.setUserAvatar(formData.ava, props.id);
         }
     }
 
@@ -50,6 +50,7 @@ const Profile = (props) => {
     const handleClose = () => {
         setOpen(false);
     }
+
 
     return (
         <Card className={classes.profileInfo}>

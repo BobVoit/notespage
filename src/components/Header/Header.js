@@ -32,6 +32,11 @@ const useStyles = theme => ({
     },
     linkProfile: {
         color: "#fff",
+    },
+    signOut: {
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '0.9rem'
+        }
     }
 })
 
@@ -77,7 +82,12 @@ class Header extends React.Component {
                                 </Typography>
                             </Box>
                             <Box mr={3}> 
-                                <Button onClick={this.logout} color="inherit" variant="outlined">Sign Out</Button>
+                                <Button 
+                                    className={classes.signOut} 
+                                    onClick={this.logout}
+                                    color="inherit" 
+                                    variant="outlined"
+                                >Sign Out</Button>
                             </Box>
                         </>
                         }

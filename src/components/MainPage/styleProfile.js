@@ -4,6 +4,9 @@
 const useStyles = theme => ({
     root: {
         flexGrow: 1,
+        [theme.breakpoints.down("sm")]: {
+            display: "block"
+        }
     },
     content: {
         marginTop: theme.spacing(6),
