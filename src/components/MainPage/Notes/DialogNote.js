@@ -28,7 +28,6 @@ const DialogNote = (props) => {
         <Dialog 
             open={props.open} 
             onClose={props.handleClickClose} 
-            // disableBackdropClick
             fullWidth
             aria-labelledby="about-note" 
             className={classes.root}
@@ -54,12 +53,5 @@ const DialogNote = (props) => {
     )
 }
 
-
-{/* <Box>
-    {props.title}
-</Box>
-<IconButton>
-    <CloseIcon />
-</IconButton> */}
 
 export default DialogNote;

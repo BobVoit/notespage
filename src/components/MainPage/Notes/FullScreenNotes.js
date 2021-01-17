@@ -31,7 +31,7 @@ const FullScreenNotes = (props) => {
                     <Typography variant="h5">Notes</Typography>
                 </Toolbar>
             </AppBar>
-            <List dence>
+            <List>
                 {props.notes && props.notes.map(note => <FullScreenItem
                     key={note.id}
                     id={note.id}

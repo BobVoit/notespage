@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, makeStyles, IconButton, ListItem, ListItemText, ListItemSecondaryAction } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import DialogNote from './DialogNote';
+import CloseWindow from './CloseWindow';
 
 const useStyles = makeStyles(theme => ({
     wrapper: {
@@ -31,25 +32,37 @@ const FullScreenItem = (props) => {
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);
+    const [windowClose, setWindowClose] = React.useState(false);
 
     const deleteNote = () => {
         props.deleteNote(props.id);
     }
 
-
     const handleClickOpen = () => {
         setOpen(true);
+        console.log(open);
     }
 
     const handleClickClose = () => {
         setOpen(false);
+        console.log(open);
+    }
+
+    const handleClickOpenWindowClose = () => {
+        setWindowClose(true);
+        console.log(open);
+    }
+
+    const handleClickCloseWindowClose = () => {
+        setWindowClose(false);
+        console.log(open);
     }
 
 
     return (
         <>
             <ListItem 
-                button={!open ? true : false}
+                button={open ? false : true}
                 dense={true}
                 divider 
                 // disabled
@@ -66,19 +79,26 @@ const FullScreenItem = (props) => {
                         secondary={props.date} 
                         />
                 </Box>
-                <DialogNote 
-                    open={open} 
-                    handleClickClose={handleClickClose}
-                    title={props.title}
-                    message={props.message}
-                    date={props.date}
-                />
+                <ListItemSecondaryAction>
+                    <DialogNote 
+                        open={open} 
+                        handleClickClose={handleClickClose}
+                        title={props.title}
+                        message={props.message}
+                        date={props.date}
+                    />
+                </ListItemSecondaryAction>
                 <ListItemSecondaryAction>
                     <IconButton 
-                        onClick={deleteNote} 
+                        onClick={handleClickOpenWindowClose} 
                     >
                         <DeleteForeverIcon />
                     </IconButton>
+                    <CloseWindow 
+                        open={windowClose}
+                        handleClose={handleClickCloseWindowClose}
+                        deleteNote={deleteNote}
+                    />
                 </ListItemSecondaryAction>
             </ListItem>
         </>
