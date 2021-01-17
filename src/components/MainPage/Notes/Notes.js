@@ -1,24 +1,31 @@
 import React from 'react';
-import { Card, CardContent, Box, Button } from '@material-ui/core';
+import { Box, Button, List } from '@material-ui/core';
 import { compose } from 'redux';
-import { withStyles } from '@material-ui/styles';
-import Note from './Note';
+import { withStyles } from '@material-ui/core/styles';
 import NotesForm from './NotesForm';
 import Preloader from '../../common/Preloader/Preloader';
 import { reset } from 'redux-form'; 
-import FullScreenNotes from './FullScreenNotes/FullScreenNotes';
+import FullScreenItem from './Note';
+import FullScreenNotes from './FullScreenNotes';
  
 const useStyles = theme => ({
-    root: {
+    list: {
         flexGrow: 1,
         minHeight: 400,
         maxHeight: 400,
-        overflow: "auto"
+        overflow: "auto",
+        backgroundColor: theme.palette.background.paper,
     },
     preloader: {
         display: "flex",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+    },
+    openFullScreen: {
+        marginTop: theme.spacing(2),
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-end"
     }
 });
 
@@ -61,20 +68,21 @@ class Notes extends React.Component {
 
         return (
             <>
-            
-                <Card className={classes.root}>
-                    <CardContent>
-                        {this.props.notes && this.props.notes.map(note => <Note 
-                            key={note.id}
-                            id={note.id}
-                            deleteNote={this.props.deleteNote} 
-                            title={note.title} 
-                            message={note.message} 
-                            date={note.messageDate}
-                        />)}
-                    </CardContent>
-                </Card>
-                <Button onClick={this.openFullScreen}>Open</Button>
+                <List className={classes.list}>
+                    {this.props.notes && this.props.notes.map(note => <FullScreenItem
+                        key={note.id}
+                        id={note.id}
+                        deleteNote={this.props.deleteNote} 
+                        title={note.title} 
+                        message={note.message} 
+                        date={note.messageDate}
+                    />)}
+                </List>
+                <Box className={classes.openFullScreen}>
+                    <Button 
+                        onClick={this.openFullScreen}
+                    >Open full screen</Button>
+                </Box>
                 <Box>
                     <NotesForm
                         onSubmit={this.addNote}

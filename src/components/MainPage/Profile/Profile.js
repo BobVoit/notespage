@@ -28,16 +28,6 @@ const Profile = (props) => {
     const [open, setOpen] = React.useState(false);
 
     const onSubmit = (formData) => {
-        // if (formData.ava) {
-        //     if (formData.ava.type.startsWith('image/')) {
-        //         let reader = new FileReader();
-        //         reader.onload = () => {
-        //             let dataURL = reader.result;
-        //             props.setUserAvatar(dataURL, props.id);
-        //         }
-        //         reader.readAsDataURL(formData.ava);
-        //     }
-        // }
         if (formData.ava) {
             props.setUserAvatar(formData.ava, props.id);
         }
