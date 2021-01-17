@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box, makeStyles, Paper, Typography, IconButton  } from '@material-ui/core';
+import { Box, makeStyles, Paper, Typography, IconButton, Button } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import DialogNote from './DialogNote';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -36,6 +37,12 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    buttons: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+
     }
 }))
 
@@ -44,8 +51,19 @@ const useStyles = makeStyles(theme => ({
 const Note = (props) => {
     const classes = useStyles();
 
+    const [open, setOpen] = React.useState(false);
+
     const deleteNote = () => {
         props.deleteNote(props.id);
+    }
+
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    }
+
+    const handleClickClose = () => {
+        setOpen(false);
     }
 
     return (
@@ -53,21 +71,27 @@ const Note = (props) => {
             <Paper className={classes.content}>
                 <Box>
                     <Box className={classes.titleWrapper}>
-                        <Typography className={classes.field} variant="subtitle2">Title</Typography>
+                        <Typography className={classes.field} variant="subtitle2">Заметка:</Typography>
                         <Typography variant="subtitle1">{props.title}</Typography>
                     </Box>
-                    <Box className={classes.messageWrapper}>
-                        <Typography className={classes.field} variant="subtitle2">Notes</Typography>
-                        <Typography variant="subtitle1">{props.message}</Typography>
-                    </Box>
+                    <DialogNote 
+                        open={open} 
+                        handleClickClose={handleClickClose}
+                        title={props.title}
+                        message={props.message}
+                        date={props.date}
+                    />
                     <Box className={classes.dateWrapper}>
-                        <Typography className={classes.field} variant="subtitle2">Data</Typography>
+                        <Typography className={classes.field} variant="subtitle2">Дата:</Typography>
                         <Typography variant="subtitle1">{props.date}</Typography>
                     </Box>
                 </Box>
-                <IconButton onClick={deleteNote}>
-                    <DeleteForeverIcon />
-                </IconButton>
+                <Box className={classes.buttons}>
+                    <Button onClick={handleClickOpen}>More...</Button>
+                    <IconButton onClick={deleteNote}>
+                        <DeleteForeverIcon />
+                    </IconButton>
+                </Box>
             </Paper>
         </Box>
     )

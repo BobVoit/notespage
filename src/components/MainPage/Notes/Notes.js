@@ -1,11 +1,12 @@
 import React from 'react';
-import { Card, CardContent, Box } from '@material-ui/core';
+import { Card, CardContent, Box, Button } from '@material-ui/core';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/styles';
 import Note from './Note';
 import NotesForm from './NotesForm';
 import Preloader from '../../common/Preloader/Preloader';
 import { reset } from 'redux-form'; 
+import FullScreenNotes from './FullScreenNotes/FullScreenNotes';
  
 const useStyles = theme => ({
     root: {
@@ -23,6 +24,18 @@ const useStyles = theme => ({
 
 
 class Notes extends React.Component {
+
+    state = {
+        open: false
+    }
+
+    openFullScreen = () => {
+        this.setState({open: true});
+    }
+
+    closeFullScreen = () => {
+        this.setState({open: false});
+    }
 
     componentDidMount() {
         console.log(this.props.userId);
@@ -48,6 +61,7 @@ class Notes extends React.Component {
 
         return (
             <>
+            
                 <Card className={classes.root}>
                     <CardContent>
                         {this.props.notes && this.props.notes.map(note => <Note 
@@ -60,11 +74,18 @@ class Notes extends React.Component {
                         />)}
                     </CardContent>
                 </Card>
+                <Button onClick={this.openFullScreen}>Open</Button>
                 <Box>
                     <NotesForm
                         onSubmit={this.addNote}
                     />
                 </Box>
+                <FullScreenNotes 
+                    notes={this.props.notes}
+                    deleteNote={this.props.deleteNote} 
+                    closeFullScreen={this.closeFullScreen}
+                    open={this.state.open}
+                />
             </>
         )
     }

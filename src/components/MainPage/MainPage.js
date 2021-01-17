@@ -40,7 +40,7 @@ class MainPage extends React.Component {
                 <CssBaseline />
                 <div className={classes.content}>
                     <Grid wrap="wrap" container spacing={2} direction="row" justify="center">
-                        <Grid xs={12} sm={12} item md={4}>
+                        <Grid xs={12} sm={12} item md={12} lg={4}>
                             <Profile
                                 avatar={this.props.avatar}
                                 nickname={this.props.nickname}
@@ -48,7 +48,7 @@ class MainPage extends React.Component {
                                 id={this.props.id}
                             />
                         </Grid>
-                        <Grid xs={12} sm={12} item md={8}>
+                        <Grid xs={12} sm={12} item md={12} lg={8}>
                             <Notes 
                                 notes={this.props.notes}
                                 getAllNotes={this.props.getAllNotes}

@@ -15,7 +15,10 @@ const useStyles = theme => ({
         marginRight: theme.spacing(1)  // 1 - 8px
     },
     title: {
-        flexGrow: 1
+        flexGrow: 1,
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '0.9rem'
+        }
     },
     header: {
         backgroundColor: "#000"
@@ -54,7 +57,7 @@ class Header extends React.Component {
                 <Container fixed>
                     <Toolbar>
                         <Avatar className={classes.logo}>YN</Avatar>
-                        <Typography variant="h6" className={classes.title}>Your Notes</Typography>
+                        <Typography variant="h6" className={classes.title}>YOUR NOTES</Typography>
                         {!this.props.isAuth 
                         ? <>
                             <Box mr={3}> 
