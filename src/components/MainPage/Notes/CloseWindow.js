@@ -28,10 +28,10 @@ const CloseWindow = (props) => {
             </DialogContent>
             <DialogActions>
             <Button onClick={props.handleClose} color="primary">
-                Disagree
+                Нет
             </Button>
             <Button onClick={closeAndDelete} color="primary" autoFocus>
-                Agree
+                Да
             </Button>
             </DialogActions>
         </Dialog>

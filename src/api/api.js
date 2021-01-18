@@ -91,5 +91,25 @@ export const userAPI = {
                 note_id
             }
         })
+    },
+    updateNickname(id, new_nickname) {
+        return axios({
+            method: 'POST',
+            url: `http://${QUERY}/api/index.php?`,
+            params: {
+                method: "updatenickname",
+                id, new_nickname
+            }
+        })
+    },
+    getNickname(id) {
+        return axios({
+            method: "GET",
+            url: `http://${QUERY}/api/index.php?`,
+            params: {
+                method: "getnickname",
+                id
+            }
+        })
     }
 }

@@ -7,6 +7,7 @@ const SET_AVATAR = 'SET_AVATAR';
 const SET_NOTES = 'SET_NOTES';
 const SET_ONE_NOTE = 'SET_ONE_NOTE';
 const DELETE_NOTE = 'DELETE_NOTE';
+const SET_NICKNAME = 'SET_NICKNAME';
 
 let initialState = {
     id: null,
@@ -16,7 +17,7 @@ let initialState = {
     isAuth: false,
     isSignUp: false,
     avatar: null,
-    notes: null
+    notes: []
 }
 
 
@@ -62,6 +63,12 @@ const userReducer = (state = initialState, action) => {
                 notes: [...state.notes.filter(note => note.id !== action.noteId)]
             }
         }
+        case SET_NICKNAME: {
+            return {
+                ...state,
+                nickname: action.nickname
+            }
+        }
         default:
             return state;
     }
@@ -96,6 +103,11 @@ export const setOneNote = (note) => ({
 export const deleteNoteFromState = (noteId) => ({
     type: DELETE_NOTE,
     noteId
+})
+
+export const setNickname = (nickname) => ({
+    type: SET_NICKNAME,
+    nickname
 })
 
 
@@ -170,6 +182,20 @@ export const deleteNote = (noteId) => async (dispatch) => {
     let response = await userAPI.deleteNote(noteId);
     if (response.data.result === 'ok') {
         dispatch(deleteNoteFromState(noteId));
+    }
+}
+
+export const getNickname = (id) => async (dispatch) => {
+    let response = await userAPI.getNickname(id);
+    if (response.data.result === 'ok') {
+        dispatch(setNickname(response.data.data.nickname));
+    }
+}
+
+export const changeNickname = (id, newNickname) => async (dispatch) => {
+    let response = await userAPI.updateNickname(id, newNickname);
+    if (response.data.result === 'ok') {
+        dispatch(getNickname(id));
     }
 }
 

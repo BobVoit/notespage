@@ -27,12 +27,9 @@ export const initializedSuccess = () => ({ type: INITIALIZED_SUCCESS });
 
 export const initializeApp = () => (dispatch) => {
     let token = Cookies.get('token');
-    if (token) {
-        let promise = dispatch(getUserByToken(token));
-        
-        Promise.all([promise])
-          .then(() => dispatch(initializedSuccess()))
-    }
+    let promise = dispatch(getUserByToken(token));
+    Promise.all([promise])
+      .then(() => dispatch(initializedSuccess()))
 }
 
 

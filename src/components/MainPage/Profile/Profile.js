@@ -3,6 +3,8 @@ import { Container, CssBaseline, Box, Typography, Grid, Button, Card, CardConten
 import { makeStyles } from '@material-ui/core/styles';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import AvatarForm from './AvaterForm';
+import EditIcon from '@material-ui/icons/Edit';
+import EditDialog from './EditDialog';
 
 const useStyles = makeStyles(theme => ({
     profileInfo: {
@@ -19,19 +21,19 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         marginBottom: theme.spacing(3),
     },
+    editWrapper: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+    }
 }))
 
 
 
 const Profile = (props) => {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
 
-    const onSubmit = (formData) => {
-        if (formData.ava) {
-            props.setUserAvatar(formData.ava, props.id);
-        }
-    }
+    const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -41,6 +43,28 @@ const Profile = (props) => {
         setOpen(false);
     }
 
+
+    const [openEdit, setOpenEdit] = React.useState(false);
+
+
+    const handleOpenEdit = () => {
+        setOpenEdit(true);
+    }
+
+    const handleCloseEdit = () => {
+        setOpenEdit(false);
+    }
+
+    const onSubmit = (formData) => {
+        if (formData.ava) {
+            props.setUserAvatar(formData.ava, props.id);
+        }
+    }
+
+    const changeNickname = (formData) => {
+        console.log(formData);
+        props.changeNickname(props.id, formData.nickname);
+    }
 
     return (
         <Card className={classes.profileInfo}>
@@ -64,6 +88,19 @@ const Profile = (props) => {
                     onSubmit={onSubmit}
                 />
             </CardContent>
+            <Box className={classes.editWrapper}>
+                <Button
+                    size="small"
+                    variant="contained"
+                    endIcon={<EditIcon />}
+                    onClick={handleOpenEdit}
+                >Edit</Button>
+            </Box>
+            <EditDialog 
+                open={openEdit}
+                handleCloseEdit={handleCloseEdit}
+                onSubmit={changeNickname}
+            />
         </Card>
     )
 }

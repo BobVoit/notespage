@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogTitle, Divider, Typography, Box, Button } from '@material-ui/core';
+import { Dialog, DialogContent, DialogTitle, Divider, Typography, Box, Button, DialogActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 
@@ -16,6 +16,10 @@ const useStyles = makeStyles(theme => ({
     },
     dateTitle: {
         marginRight: theme.spacing(1)
+    },
+    close: {
+        paddingRight: theme.spacing(3),
+        paddingLeft: theme.spacing(3),
     }
 }))
 
@@ -48,7 +52,9 @@ const DialogNote = (props) => {
                     
                 </Box>
             </DialogContent>
-            <Button onClick={props.handleClickClose}>Close</Button>
+            <DialogActions>
+                <Button size="large" className={classes.close} onClick={props.handleClickClose}>Close</Button>
+            </DialogActions>
         </Dialog>
     )
 }
