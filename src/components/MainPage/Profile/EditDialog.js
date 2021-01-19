@@ -1,7 +1,8 @@
 import { Dialog, DialogContent, DialogContentText, DialogTitle, TextField, Button, Box, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-
+import EditNicknameForm from './EditNicknameForm';
+import EditAvatarForm from './EditAvatarForm';
 
 const useStyles = makeStyles(theme => ({
     submitWrapper: {
@@ -16,8 +17,7 @@ const useStyles = makeStyles(theme => ({
             color: "#000",
             backgroundColor: "#fff",
         }
-    },
-    
+    },  
 }))
 
 
@@ -26,10 +26,19 @@ const Input = ({input, meta, ...props}) => {
 }
 
 const EditDialog = (props) => {
-    const classes= useStyles();
-    console.log(props);
+        
 
+    const changeNickname = (formData) => {
+        if (props.id, formData.nickname) {
+            props.changeNickname(props.id, formData.nickname);
+        }
+    }
 
+    const changeAvatar = (formData) => {
+        if (formData.avatar && props.id) {
+            props.changeAvatar(props.id, formData.avatar);
+        }
+    }
     return (
         <Dialog
             open={props.open}
@@ -41,31 +50,22 @@ const EditDialog = (props) => {
             <DialogTitle id="edit-dialog">Редактировать</DialogTitle>
             <DialogContent>
                 <DialogContentText>
+                    Изменить аватар
+                </DialogContentText>
+                <EditAvatarForm 
+                    onSubmit={changeAvatar}
+                />
+
+                <DialogContentText>
                     Изменить никнейм 
                 </DialogContentText>
-                <form onSubmit={props.handleSubmit}>
-                    <Field 
-                        component={Input} 
-                        margin="dense"
-                        label="Введите новое имя"    
-                        fullWidth
-                        name={"nickname"}
-                    /> 
-                    <Box className={classes.submitWrapper}>
-                        <Button 
-                            type="submit"
-                            variant="contained"
-                            className={classes.submit}
-                            onClick={props.handleCloseEdit}
-                        >Изменить</Button>
-                    </Box>
-                </form>
+                <EditNicknameForm 
+                    onSubmit={changeNickname}
+                />
             </DialogContent>
         </Dialog>
     )
 }
 
 
-export default reduxForm({
-    form: "edit"
-})(EditDialog);
+export default EditDialog;

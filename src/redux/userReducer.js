@@ -85,7 +85,6 @@ export const setSignUp = (isSignUp) => ({
 }) 
 
 export const setAvatar = (avatar) => {
-    console.log(avatar);
     return {
     type: SET_AVATAR,
     avatar
@@ -129,6 +128,8 @@ export const getUserByToken = (token) => async (dispatch) => {
 
 export const login = (login, password) => async (dispatch) => {
     let response = await userAPI.login(login, password);
+    console.log(login, password);
+    console.log(response.data);
     if (response.data.result === 'ok') {
         dispatch(getUserByToken(response.data.data));
         Cookies.set('token', response.data.data, { expires: 2 });
@@ -145,7 +146,6 @@ export const logout = (token) => async (dispatch) => {
 
 export const getUserAvatar = (id) => async (dispatch) => {
     let response = await userAPI.getUserAvatar(id);
-    console.log(response);
     if (response.data.result === 'ok') {
         dispatch(setAvatar(response.data.data));
     } else {
@@ -155,7 +155,6 @@ export const getUserAvatar = (id) => async (dispatch) => {
 
 export const setUserAvatar = (avatar, id) => async (dispatch) => {
     let response = await userAPI.setUserAvatar(avatar, id);
-    console.log(response);
     if (response.data.result === 'ok') {
         dispatch(getUserAvatar(id));
     }
@@ -196,6 +195,13 @@ export const changeNickname = (id, newNickname) => async (dispatch) => {
     let response = await userAPI.updateNickname(id, newNickname);
     if (response.data.result === 'ok') {
         dispatch(getNickname(id));
+    }
+}
+
+export const changeAvatar = (id, newAvatar) => async (dispatch) => {
+    let response = await userAPI.changeAvatar(newAvatar, id);
+    if (response.data.result === 'ok') {
+        dispatch(getUserAvatar(id));
     }
 }
 

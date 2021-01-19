@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import Profile from './Profile/Profile';
 import Notes from './Notes/Notes';
-import { getAllNotes, addNote, deleteNote, setUserAvatar, changeNickname } from '../../redux/userReducer';
+import { getAllNotes, addNote, deleteNote, setUserAvatar, changeNickname, changeAvatar } from '../../redux/userReducer';
 
 class MainPage extends React.Component {
     constructor(props) {
@@ -46,6 +46,7 @@ class MainPage extends React.Component {
                                 nickname={this.props.nickname}
                                 setUserAvatar={this.props.setUserAvatar}
                                 changeNickname={this.props.changeNickname}
+                                changeAvatar={this.props.changeAvatar}
                                 id={this.props.id}
                             />
                         </Grid>
@@ -90,7 +91,8 @@ export default compose(
         getAllNotes, 
         addNote,
         deleteNote,
-        changeNickname
+        changeNickname,
+        changeAvatar
     }),
     withRouter,
     withAuthRedirect

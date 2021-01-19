@@ -33,7 +33,7 @@ const AvatarForm = (props) =>  {
             <DialogTitle id="form-dialog-set-ava">Select an image</DialogTitle>
             <DialogContent>
                 <form className={classes.form} onSubmit={props.handleSubmit} >
-                    <Field name={"ava"} type="text" component={FieldFileInput} />
+                    <Field name={"ava"} component={FieldFileInput} />
                     <Button className={classes.submit} onClick={props.handleClose} size="small" type="submit" variant="contained">Set</Button>
                 </form>
                 <Box className={classes.cancelWrapper}>

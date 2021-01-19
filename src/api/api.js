@@ -111,5 +111,12 @@ export const userAPI = {
                 id
             }
         })
-    }
+    },
+    changeAvatar(new_avatar, id) {
+        let data = new FormData();
+        data.append('id', id);
+        data.append('new_avatar', new_avatar, new_avatar.name);
+        data.append ('method', 'updateavatar');
+        return axios.post(`http://${QUERY}/api/index.php?`, data);
+    },
 }

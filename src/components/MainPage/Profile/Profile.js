@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, CssBaseline, Box, Typography, Grid, Button, Card, CardContent, Avatar } from '@material-ui/core';
+import { Box, Typography, Grid, Button, Card, CardContent, Avatar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import AvatarForm from './AvaterForm';
@@ -61,11 +61,6 @@ const Profile = (props) => {
         }
     }
 
-    const changeNickname = (formData) => {
-        console.log(formData);
-        props.changeNickname(props.id, formData.nickname);
-    }
-
     return (
         <Card className={classes.profileInfo}>
             <CardContent>
@@ -99,7 +94,9 @@ const Profile = (props) => {
             <EditDialog 
                 open={openEdit}
                 handleCloseEdit={handleCloseEdit}
-                onSubmit={changeNickname}
+                changeNickname={props.changeNickname}
+                changeAvatar={props.changeAvatar}
+                id={props.id}
             />
         </Card>
     )

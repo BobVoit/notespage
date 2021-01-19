@@ -1,4 +1,4 @@
-import { AppBar, Dialog, IconButton, List, ListItem, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Dialog, IconButton, List, Toolbar, Typography } from '@material-ui/core';
 import React from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from '@material-ui/core/styles';

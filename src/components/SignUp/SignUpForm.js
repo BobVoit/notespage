@@ -3,11 +3,9 @@ import { Field, reduxForm } from 'redux-form';
 import { required, maxLengthCreator, minLengthCreator } from '../../utils/validators/validators';
 import { Input } from '../common/FormsControl/FormsControl';
 import { Button } from '@material-ui/core';
-import style from './SignUp.module.css';
-import { Container, CssBaseline, Typography, Avatar, Box } from '@material-ui/core';
+import { Container, CssBaseline, Typography, Avatar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
-import { NavLink } from 'react-router-dom';
 
 const maxLengthLogin30 = maxLengthCreator(30);
 const minLengthLogin3 = minLengthCreator(3);

@@ -45,7 +45,6 @@ class Notes extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.userId);
         this.props.getAllNotes(this.props.userId);
     }
 
