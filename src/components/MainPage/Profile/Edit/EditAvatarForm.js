@@ -1,7 +1,7 @@
 import { Button, Box, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { FieldFileInput } from '../../common/FormsControl/FormsControl';
+import { FieldFileInput } from '../../../common/FormsControl/FormsControl';
 
 
 const useStyles = makeStyles(theme => ({

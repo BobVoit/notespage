@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import AvatarForm from './AvaterForm';
 import EditIcon from '@material-ui/icons/Edit';
-import EditDialog from './EditDialog';
+import EditDialog from './Edit/EditDialog';
 
 const useStyles = makeStyles(theme => ({
     profileInfo: {
@@ -96,7 +96,9 @@ const Profile = (props) => {
                 handleCloseEdit={handleCloseEdit}
                 changeNickname={props.changeNickname}
                 changeAvatar={props.changeAvatar}
+                deleteAvatar={props.deleteAvatar}
                 id={props.id}
+                avatar={props.avatar}
             />
         </Card>
     )

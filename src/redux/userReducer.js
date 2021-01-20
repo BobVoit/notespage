@@ -141,6 +141,7 @@ export const logout = (token) => async (dispatch) => {
     if (response.data.result === 'ok') {
         Cookies.remove('token');
         dispatch(setUserData(null, null, null, null, false));
+        dispatch(setAvatar(null));
     }
 }
 
@@ -205,5 +206,11 @@ export const changeAvatar = (id, newAvatar) => async (dispatch) => {
     }
 }
 
+export const deleteAvatar = (id) => async (dispatch) => {
+    let response = await userAPI.deleteAvatar(id);
+    if (response.data.result === 'ok') {
+        dispatch(setAvatar(null));
+    }
+}
 
 export default userReducer;

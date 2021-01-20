@@ -1,4 +1,4 @@
-import { AppBar, Button, Container, Toolbar, Typography, Box, Avatar } from '@material-ui/core';
+import { AppBar, Button, Container, Toolbar, Typography, Box, Avatar, Hidden } from '@material-ui/core';
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'redux';
@@ -17,7 +17,7 @@ const useStyles = theme => ({
     title: {
         flexGrow: 1,
         [theme.breakpoints.down('xs')]: {
-            fontSize: '0.9rem'
+            fontSize: '0.6rem'
         }
     },
     header: {
@@ -57,7 +57,11 @@ class Header extends React.Component {
                 <Container fixed>
                     <Toolbar>
                         <Avatar className={classes.logo}>YN</Avatar>
-                        <Typography variant="h6" className={classes.title}>YOUR NOTES</Typography>
+                        <Box>
+                            <Hidden xsDown>
+                                <Typography variant="h6" className={classes.title}>YOUR NOTES</Typography>
+                            </Hidden>
+                        </Box>
                         {!this.props.isAuth 
                         ? <>
                             <Box mr={3}> 

@@ -3,21 +3,17 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import EditNicknameForm from './EditNicknameForm';
 import EditAvatarForm from './EditAvatarForm';
+import DeleteDialog from './DeleteDialog';
 
-const useStyles = makeStyles(theme => ({
-    submitWrapper: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'flex-end'
-    },
-    submit: {
+const useStyles = makeStyles(theme => ({ 
+    deleteAvatar: {
         color: "#fff",
         backgroundColor: "#000",
         '&:hover': {
             color: "#000",
             backgroundColor: "#fff",
         }
-    },  
+    }
 }))
 
 
@@ -26,7 +22,16 @@ const Input = ({input, meta, ...props}) => {
 }
 
 const EditDialog = (props) => {
-        
+    const classes = useStyles();
+    const [openDeleteDialog, setDeleteDialog] = React.useState(false); 
+
+    const handleClose = () => {
+        setDeleteDialog(false);
+    }
+
+    const handleOpen = () => {
+        setDeleteDialog(true);
+    }
 
     const changeNickname = (formData) => {
         if (props.id, formData.nickname) {
@@ -49,20 +54,31 @@ const EditDialog = (props) => {
         >
             <DialogTitle id="edit-dialog">Редактировать</DialogTitle>
             <DialogContent>
+                {props.avatar && <>
+                    <DialogContentText>
+                        Сменить аватар
+                    </DialogContentText>
+                    <EditAvatarForm 
+                        onSubmit={changeAvatar}
+                    />
+                    <Button 
+                        className={classes.deleteAvatar}
+                        onClick={handleOpen}
+                    >Удалить аватар</Button>
+                </>}
                 <DialogContentText>
-                    Изменить аватар
-                </DialogContentText>
-                <EditAvatarForm 
-                    onSubmit={changeAvatar}
-                />
-
-                <DialogContentText>
-                    Изменить никнейм 
+                    Сменить никнейм 
                 </DialogContentText>
                 <EditNicknameForm 
                     onSubmit={changeNickname}
                 />
             </DialogContent>
+            <DeleteDialog 
+                open={openDeleteDialog}
+                handleClose={handleClose}
+                deleteAvatar={props.deleteAvatar}
+                id={props.id}
+            />
         </Dialog>
     )
 }

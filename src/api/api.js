@@ -119,4 +119,14 @@ export const userAPI = {
         data.append ('method', 'updateavatar');
         return axios.post(`http://${QUERY}/api/index.php?`, data);
     },
+    deleteAvatar(id) {
+        return axios({
+            method: "GET",
+            url: `http://${QUERY}/api/index.php?`,
+            params: {
+                method: "deleteavatar",
+                id
+            }
+        })
+    }
 }
