@@ -23,6 +23,11 @@ const useStyles = theme => ({
     header: {
         backgroundColor: "#000"
     },
+    toolbar: {
+        // display: 'flex',
+        // flexDirection: 'row',
+        // justifyContent: 'space-between'
+    },
     button: {
         color: "#000",
         backgroundColor: "#fff"
@@ -55,13 +60,16 @@ class Header extends React.Component {
         return (
             <AppBar position="relative" className={classes.header}>
                 <Container fixed>
-                    <Toolbar>
-                        <Avatar className={classes.logo}>YN</Avatar>
-                        <Box>
+                    <Toolbar className={classes.toolbar}>
+                        {/* <Box> */}
+                            <Avatar className={classes.logo}>YN</Avatar>
                             <Hidden xsDown>
                                 <Typography variant="h6" className={classes.title}>YOUR NOTES</Typography>
                             </Hidden>
-                        </Box>
+                            <Hidden xsUP>
+                                <Typography variant="h6" className={classes.title}></Typography>
+                            </Hidden>
+                        {/* </Box> */}
                         {!this.props.isAuth 
                         ? <>
                             <Box mr={3}> 

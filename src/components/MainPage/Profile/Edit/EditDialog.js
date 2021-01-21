@@ -6,6 +6,11 @@ import EditAvatarForm from './EditAvatarForm';
 import DeleteDialog from './DeleteDialog';
 
 const useStyles = makeStyles(theme => ({ 
+    deleteAvatarWrapper: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+    },
     deleteAvatar: {
         color: "#fff",
         backgroundColor: "#000",
@@ -61,10 +66,13 @@ const EditDialog = (props) => {
                     <EditAvatarForm 
                         onSubmit={changeAvatar}
                     />
-                    <Button 
-                        className={classes.deleteAvatar}
-                        onClick={handleOpen}
-                    >Удалить аватар</Button>
+                    <Box mt={2} className={classes.deleteAvatarWrapper}>
+                        <Button 
+                            size="small"
+                            className={classes.deleteAvatar}
+                            onClick={handleOpen}
+                        >Удалить аватар</Button>
+                    </Box>
                 </>}
                 <DialogContentText>
                     Сменить никнейм 
