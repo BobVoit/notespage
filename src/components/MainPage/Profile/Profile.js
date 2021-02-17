@@ -5,6 +5,7 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import AvatarForm from './AvaterForm';
 import EditIcon from '@material-ui/icons/Edit';
 import EditDialog from './Edit/EditDialog';
+import DisplayAvatar from './DisplayAvatar/DisplayAvatar';
 
 const useStyles = makeStyles(theme => ({
     profileInfo: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles(theme => ({
 const Profile = (props) => {
     const classes = useStyles();
 
+
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -46,7 +48,6 @@ const Profile = (props) => {
 
     const [openEdit, setOpenEdit] = React.useState(false);
 
-
     const handleOpenEdit = () => {
         setOpenEdit(true);
     }
@@ -54,6 +55,18 @@ const Profile = (props) => {
     const handleCloseEdit = () => {
         setOpenEdit(false);
     }
+
+
+    const [openAvatar, setOpenAvatar] = React.useState(false);
+
+    const handleOpenAvatar = () => {
+        setOpenAvatar(true);
+    }
+
+    const handleCloseAvatar = () => {
+        setOpenAvatar(false);
+    }
+
 
     const onSubmit = (formData) => {
         if (formData.ava) {
@@ -66,7 +79,12 @@ const Profile = (props) => {
             <CardContent>
                 <Grid justify="center" alignItems="center" direction="column" container>
                     <Grid item >
-                        <Avatar alt="Avatar" className={classes.avatar} src={props.avatar}>
+                        <Avatar 
+                            alt="Avatar" 
+                            className={classes.avatar} 
+                            src={props.avatar} 
+                            onClick={props.avatar ? handleOpenAvatar : null}
+                        >
                             {!props.avatar && 
                             <Button size="small" className={classes.openDialogWindow} onClick={handleClickOpen} >
                                 <AddAPhotoIcon />
@@ -75,6 +93,8 @@ const Profile = (props) => {
                     </Grid>
                     <Grid item >
                         <Typography variant="h6">{props.nickname}</Typography>
+                        <Typography>Количество записей: {props.countNotes}</Typography>
+                        <Typography>Последняя запись: {props.dateLastNote}</Typography>
                     </Grid>
                 </Grid>                              
                 <AvatarForm 
@@ -99,6 +119,12 @@ const Profile = (props) => {
                 deleteAvatar={props.deleteAvatar}
                 id={props.id}
                 avatar={props.avatar}
+            />
+            <DisplayAvatar 
+                nickname={props.nickname}
+                avatar={props.avatar}
+                open={openAvatar}  
+                handleClose={handleCloseAvatar}              
             />
         </Card>
     )

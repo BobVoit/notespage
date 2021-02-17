@@ -8,6 +8,8 @@ const SET_NOTES = 'SET_NOTES';
 const SET_ONE_NOTE = 'SET_ONE_NOTE';
 const DELETE_NOTE = 'DELETE_NOTE';
 const SET_NICKNAME = 'SET_NICKNAME';
+const SET_COUNT_NOTES = 'SET_COUNT_NOTES';
+const SET_DATE_LAST_TODO = 'SET_DATE_LAST_TODO';
 
 let initialState = {
     id: null,
@@ -17,7 +19,9 @@ let initialState = {
     isAuth: false,
     isSignUp: false,
     avatar: null,
-    notes: []
+    notes: [],
+    countNotes: null,
+    dateLastNote: '',
 }
 
 
@@ -69,6 +73,18 @@ const userReducer = (state = initialState, action) => {
                 nickname: action.nickname
             }
         }
+        case SET_COUNT_NOTES: {
+            return {
+                ...state,
+                countNotes: action.countNotes
+            }
+        }
+        case SET_DATE_LAST_TODO: {
+            return {
+                ...state,
+                dateLastNote: action.date
+            }
+        }
         default:
             return state;
     }
@@ -110,6 +126,17 @@ export const setNickname = (nickname) => ({
 })
 
 
+export const setCountNotes = (countNotes) => ({
+    type: SET_COUNT_NOTES,
+    countNotes
+})
+
+export const setDateLastTodo = (date) => ({
+    type: SET_DATE_LAST_TODO,
+    date
+})
+
+
 export const signUp = (login, password, nickname) => async (dispatch) => {
     let response = await userAPI.signUp(login, password, nickname);
     if (response.data.result === 'ok') {
@@ -142,6 +169,8 @@ export const logout = (token) => async (dispatch) => {
         Cookies.remove('token');
         dispatch(setUserData(null, null, null, null, false));
         dispatch(setAvatar(null));
+        dispatch(setCountNotes(null));
+        dispatch(setDateLastTodo(""));
     }
 }
 
@@ -211,6 +240,27 @@ export const deleteAvatar = (id) => async (dispatch) => {
     if (response.data.result === 'ok') {
         dispatch(setAvatar(null));
     }
+}
+
+export const getCountNotes = (id) => async (dispatch) => {
+    let response = await userAPI.getCountNotes(id);
+    let { result, data } = response.data;
+    if (result === 'ok') {
+        dispatch(setCountNotes(data)); 
+    }
+}
+
+export const getDateLastNote = (id) => async (dispatch) => {
+    let response = await userAPI.getDataLastNote(id);
+    let { result, data } = response.data;
+    if (result === 'ok') {
+        dispatch(setDateLastTodo(data)); 
+    }
+}
+
+export const getStats = id => dispatch =>{
+    dispatch(getCountNotes(id));
+    dispatch(getDateLastNote(id));
 }
 
 export default userReducer;

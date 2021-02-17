@@ -128,5 +128,25 @@ export const userAPI = {
                 id
             }
         })
+    },
+    getCountNotes(id) {
+        return axios({
+            method: 'GET',
+            url: `http://${QUERY}/api/index.php?`,
+            params: {
+                method: 'countnotes',
+                id
+            }
+        })
+    },
+    getDataLastNote(id) {
+        return axios({
+            method: 'GET',
+            url: `http://${QUERY}/api/index.php?`,
+            params: {
+                method: 'datelastnotes',
+                id
+            }
+        })
     }
 }

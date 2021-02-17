@@ -9,7 +9,8 @@ import PropTypes from 'prop-types';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import Profile from './Profile/Profile';
 import Notes from './Notes/Notes';
-import { getAllNotes, addNote, deleteNote, setUserAvatar, changeNickname, changeAvatar, deleteAvatar } from '../../redux/userReducer';
+import { getAllNotes, addNote, deleteNote, setUserAvatar, 
+    changeNickname, changeAvatar, deleteAvatar, getStats } from '../../redux/userReducer';
 
 class MainPage extends React.Component {
     constructor(props) {
@@ -29,7 +30,7 @@ class MainPage extends React.Component {
                 this.props.history.push("/login");
             }
         }
-        
+        this.props.getStats(this.props.id);
     }
 
     render() {
@@ -49,6 +50,9 @@ class MainPage extends React.Component {
                                 changeAvatar={this.props.changeAvatar}
                                 deleteAvatar={this.props.deleteAvatar}
                                 id={this.props.id}
+                                getStats={this.props.getStats}
+                                countNotes={this.props.countNotes}
+                                dateLastNote={this.props.dateLastNote}
                             />
                         </Grid>
                         <Grid xs={12} sm={12} item md={12} lg={8}>
@@ -73,6 +77,14 @@ MainPage.propTypes = {
     token: PropTypes.string,
     avatar: PropTypes.string,
     id: PropTypes.number,
+    setUserAvatar: PropTypes.func,
+    getAllNotes: PropTypes.func, 
+    addNote: PropTypes.func,
+    deleteNote: PropTypes.func,
+    changeNickname: PropTypes.func,
+    changeAvatar: PropTypes.func,
+    deleteAvatar: PropTypes.func,
+    getStats: PropTypes.func,
 }
 
 
@@ -82,6 +94,8 @@ const mapStateToProps = (state) => ({
     isAuth: state.user.isAuth,
     id: state.user.id,
     notes: state.user.notes,
+    countNotes: state.user.countNotes,
+    dateLastNote: state.user.dateLastNote,
 })
 
 
@@ -94,7 +108,8 @@ export default compose(
         deleteNote,
         changeNickname,
         changeAvatar,
-        deleteAvatar
+        deleteAvatar,
+        getStats
     }),
     withRouter,
     withAuthRedirect

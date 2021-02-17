@@ -11,6 +11,14 @@ import Preloader from './components/common/Preloader/Preloader';
 import { compose } from 'redux';
 import store from './redux/store';
 
+const preloaderStyle = {
+  width: '100%',
+  height: '100vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+}
+
 class App extends React.Component {
   componentDidMount() {
     this.props.initializeApp();
@@ -18,7 +26,11 @@ class App extends React.Component {
 
   render() {
     if (!this.props.initialized) {
-      return <Preloader />
+      return (
+        <div style={preloaderStyle}>
+          <Preloader />
+        </div>
+      )
     }
 
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Button, List } from '@material-ui/core';
 import { compose } from 'redux';
-import { withStyles } from '@material-ui/core/styles';
+    import { withStyles } from '@material-ui/core/styles';
 import NotesForm from './NotesForm';
 import Preloader from '../../common/Preloader/Preloader';
 import { reset } from 'redux-form'; 
