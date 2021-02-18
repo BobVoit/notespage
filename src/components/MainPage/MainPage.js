@@ -8,8 +8,8 @@ import PropTypes from 'prop-types';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import Profile from './Profile/Profile';
 import Notes from './Notes/Notes';
-import { getAllNotes, addNote, deleteNote, setUserAvatar, 
-    changeNickname, changeAvatar, deleteAvatar, getStats } from '../../redux/userReducer';
+import { setUserAvatar, changeNickname, changeAvatar, deleteAvatar } from '../../redux/userReducer';
+import { addNote, deleteNote, getAllNotes, getStats } from '../../redux/noteReducer';
 
 
 const useStyles = theme => ({
@@ -72,7 +72,7 @@ class MainPage extends React.Component {
     }
 
     render() {
-        const { classes, avatar, nickname, id, countNotes, dateLastNote, getStats } = this.props;
+        const { classes, avatar, nickname, id, countNotes, dateLastNote, getStats, notes, getAllNotes } = this.props;
 
         return (
             <Container component="main" maxWidth="md" className={classes.root}>
@@ -95,11 +95,11 @@ class MainPage extends React.Component {
                         </Grid>
                         <Grid xs={12} sm={12} item md={12} lg={8}>
                             <Notes 
-                                notes={this.props.notes}
-                                getAllNotes={this.props.getAllNotes}
-                                userId={this.props.id}
-                                addNote={this.props.addNote}
-                                deleteNote={this.props.deleteNote}
+                                notes={notes}
+                                getAllNotes={getAllNotes}
+                                userId={id}
+                                addNote={addNote}
+                                deleteNote={deleteNote}
                             />
                         </Grid>
                     </Grid>
@@ -131,9 +131,9 @@ const mapStateToProps = (state) => ({
     avatar: state.user.avatar,
     isAuth: state.user.isAuth,
     id: state.user.id,
-    notes: state.user.notes,
-    countNotes: state.user.countNotes,
-    dateLastNote: state.user.dateLastNote,
+    notes: state.note.notes,
+    countNotes: state.note.countNotes,
+    dateLastNote: state.note.dateLastNote,
 })
 
 

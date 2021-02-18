@@ -48,7 +48,6 @@ export const userAPI = {
         let data = new FormData();
         data.append('id', id);
         data.append('avatar', avatar, avatar.name);
-        // data.append('avatar', avatar);
         data.append ('method', 'setuseravater');
         return axios.post(`http://${QUERY}/api/index.php?`, data);
     },
@@ -59,36 +58,6 @@ export const userAPI = {
             params: {
                 method: "getuseravatar",
                 id
-            }
-        })
-    },
-    addNote(id, title, message) {
-        return axios({
-            method: 'POST',
-            url: `http://${QUERY}/api/index.php?`,
-            params: {
-                method: "addnote",
-                id, title, message
-            }
-        })
-    },
-    getAllNotes(id) {
-        return axios({
-            method: 'GET',
-            url: `http://${QUERY}/api/index.php?`,
-            params: {
-                method: "getallnotes",
-                id
-            }
-        })
-    },
-    deleteNote(note_id) {
-        return axios({
-            method: 'GET',
-            url: `http://${QUERY}/api/index.php?`,
-            params: {
-                method: "deletenote",
-                note_id
             }
         })
     },
@@ -126,6 +95,41 @@ export const userAPI = {
             params: {
                 method: "deleteavatar",
                 id
+            }
+        })
+    },
+}
+
+
+
+export const notesAPI = {
+    addNote(id, title, message) {
+        return axios({
+            method: 'POST',
+            url: `http://${QUERY}/api/index.php?`,
+            params: {
+                method: "addnote",
+                id, title, message
+            }
+        })
+    },
+    getAllNotes(id) {
+        return axios({
+            method: 'GET',
+            url: `http://${QUERY}/api/index.php?`,
+            params: {
+                method: "getallnotes",
+                id
+            }
+        })
+    },
+    deleteNote(note_id) {
+        return axios({
+            method: 'GET',
+            url: `http://${QUERY}/api/index.php?`,
+            params: {
+                method: "deletenote",
+                note_id
             }
         })
     },

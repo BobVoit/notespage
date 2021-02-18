@@ -10,6 +10,7 @@ import { initializeApp } from './redux/appReducer';
 import Preloader from './components/common/Preloader/Preloader';
 import { compose } from 'redux';
 import store from './redux/store';
+import backgroundImg from './images/backgroundImage.jpg';
 
 const preloaderStyle = {
   width: '100%',
