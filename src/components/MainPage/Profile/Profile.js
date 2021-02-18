@@ -92,7 +92,9 @@ const Profile = (props) => {
                         </Avatar>
                     </Grid>
                     <Grid item >
-                        <Typography variant="h6">{props.nickname}</Typography>
+                        <Box mb={2}>
+                            <Typography align="center" variant="h6">{props.nickname}</Typography>
+                        </Box>
                         <Typography>Количество записей: {props.countNotes}</Typography>
                         <Typography>Последняя запись: {props.dateLastNote}</Typography>
                     </Grid>

@@ -20,13 +20,13 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const NotesForm = (props) => {
+const NotesForm = ({ handleSubmit }) => {
 
     const classes = useStyles();
     
 
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <Box>
                 <Field 
                     placeholder="Еnter the subject of your note"

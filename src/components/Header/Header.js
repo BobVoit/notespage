@@ -56,7 +56,7 @@ class Header extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, nickname, isAuth } = this.props;
         return (
             <AppBar position="relative" className={classes.header}>
                 <Container fixed>
@@ -70,7 +70,7 @@ class Header extends React.Component {
                                 <Typography variant="h6" className={classes.title}></Typography>
                             </Hidden>
                         {/* </Box> */}
-                        {!this.props.isAuth 
+                        {!isAuth 
                         ? <>
                             <Box mr={3}> 
                                 <Button  
@@ -92,7 +92,7 @@ class Header extends React.Component {
                             <Box mr={1}>
                                 <Typography>
                                     <Button className={classes.linkProfile} component={NavLink} to="/mainpage">
-                                        {this.props.nickname}
+                                        {nickname}
                                     </Button>
                                 </Typography>
                             </Box>

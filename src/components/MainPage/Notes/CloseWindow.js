@@ -6,17 +6,17 @@ import React from 'react';
 
 
 
-const CloseWindow = (props) => {
+const CloseWindow = ({ deleteNote, handleClose, open }) => {
 
     const closeAndDelete = () => {
-        props.deleteNote();
-        props.handleClose();
+        deleteNote();
+        handleClose();
     }
 
     return (
         <Dialog 
-            onClose={props.handleClose}
-            open={props.open}
+            onClose={handleClose}
+            open={open}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
@@ -27,12 +27,8 @@ const CloseWindow = (props) => {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-            <Button onClick={props.handleClose} color="primary">
-                Нет
-            </Button>
-            <Button onClick={closeAndDelete} color="primary" autoFocus>
-                Да
-            </Button>
+                <Button onClick={handleClose} color="primary">Нет</Button>
+                <Button onClick={closeAndDelete} color="primary" autoFocus>Да</Button>
             </DialogActions>
         </Dialog>
     )

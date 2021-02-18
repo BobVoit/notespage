@@ -55,9 +55,9 @@ class Notes extends React.Component {
 
 
     render() {
-        const { classes } = this.props;
+        const { classes, notes, deleteNote } = this.props;
 
-        if (this.props.notes === null) {
+        if (notes === null) {
             return (
                 <Box className={classes.preloader}> 
                     <Preloader />
@@ -68,10 +68,10 @@ class Notes extends React.Component {
         return (
             <>
                 <List className={classes.list}>
-                    {this.props.notes && this.props.notes.map(note => <FullScreenItem
+                    {notes && notes.map(note => <FullScreenItem
                         key={note.id}
                         id={note.id}
-                        deleteNote={this.props.deleteNote} 
+                        deleteNote={deleteNote} 
                         title={note.title} 
                         message={note.message} 
                         date={note.messageDate}
@@ -88,8 +88,8 @@ class Notes extends React.Component {
                     />
                 </Box>
                 <FullScreenNotes 
-                    notes={this.props.notes}
-                    deleteNote={this.props.deleteNote} 
+                    notes={notes}
+                    deleteNote={deleteNote} 
                     closeFullScreen={this.closeFullScreen}
                     open={this.state.open}
                 />

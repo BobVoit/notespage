@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
 import { login } from '../../redux/userReducer';
 
-const Login = (props) => {
+const Login = ({ login, isAuth }) => {
     const onSubmit = (formData) => {
-        props.login(formData.login, formData.password);
+        login(formData.login, formData.password);
     }
 
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to="/mainpage" />
     }
 

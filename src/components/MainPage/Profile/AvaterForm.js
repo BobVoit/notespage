@@ -24,20 +24,20 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const AvatarForm = (props) =>  {
+const AvatarForm = ({ open, handleClose, handleSubmit }) =>  {
 
     const classes = useStyles();
 
     return (
-        <Dialog open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-set-ava">
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-set-ava">
             <DialogTitle id="form-dialog-set-ava">Select an image</DialogTitle>
             <DialogContent>
-                <form className={classes.form} onSubmit={props.handleSubmit} >
+                <form className={classes.form} onSubmit={handleSubmit} >
                     <Field name={"ava"} component={FieldFileInput} />
-                    <Button className={classes.submit} onClick={props.handleClose} size="small" type="submit" variant="contained">Set</Button>
+                    <Button className={classes.submit} onClick={handleClose} size="small" type="submit" variant="contained">Set</Button>
                 </form>
                 <Box className={classes.cancelWrapper}>
-                    <Button size="small" className={classes.cancel} onClick={props.handleClose} variant="outlined">Cancel</Button>
+                    <Button size="small" className={classes.cancel} onClick={handleClose} variant="outlined">Cancel</Button>
                 </Box>
             </DialogContent>
         </Dialog>

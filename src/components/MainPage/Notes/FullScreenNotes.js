@@ -17,25 +17,25 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const FullScreenNotes = (props) => {
+const FullScreenNotes = ({ open, closeFullScreen, notes, deleteNote }) => {
 
     const classes = useStyles();
 
     return (
-        <Dialog fullScreen open={props.open}>
+        <Dialog fullScreen open={open}>
             <AppBar className={classes.appBar}>
                 <Toolbar className={classes.toolBar}>
-                    <IconButton color="inherit" onClick={props.closeFullScreen}>
+                    <IconButton color="inherit" onClick={closeFullScreen}>
                         <CloseIcon />
                     </IconButton>
                     <Typography variant="h5">Notes</Typography>
                 </Toolbar>
             </AppBar>
             <List>
-                {props.notes && props.notes.map(note => <FullScreenItem
+                {notes && notes.map(note => <FullScreenItem
                     key={note.id}
                     id={note.id}
-                    deleteNote={props.deleteNote} 
+                    deleteNote={deleteNote} 
                     title={note.title} 
                     message={note.message} 
                     date={note.messageDate}

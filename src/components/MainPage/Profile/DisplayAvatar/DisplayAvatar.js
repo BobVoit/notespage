@@ -40,19 +40,18 @@ const DialogTitle = withStyles(styles)(props => {
 })
 
 
-const DisplayAvatar = (props) => {
+const DisplayAvatar = ({ handleClose, nickname, avatar, open}) => {
     const classes = useStyles();
     return (
         <Dialog
-            open={props.open}
+            open={open}
             aria-labelledby="avatar-dialog"
             maxWidth="md"
             fullWidth
         >
-            <DialogTitle id="avatar-dialog" onClose={props.handleClose}>Аватар {props.nickname}</DialogTitle>
+            <DialogTitle id="avatar-dialog" onClose={handleClose}>Аватар {nickname}</DialogTitle>
             <DialogContent>
-                <CardMedia image={props.avatar} title="avatar" className={classes.media} />
-                {/* <img src={props.avatar} /> */}
+                <CardMedia image={avatar} title="avatar" className={classes.media} />
             </DialogContent>
         </Dialog>
     )

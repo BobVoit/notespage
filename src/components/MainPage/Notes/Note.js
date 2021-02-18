@@ -28,14 +28,14 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const FullScreenItem = (props) => {
+const FullScreenItem = ({ id, title, date, message }) => {
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);
     const [windowClose, setWindowClose] = React.useState(false);
 
     const deleteNote = () => {
-        props.deleteNote(props.id);
+        deleteNote(id);
     }
 
     const handleClickOpen = () => {
@@ -75,17 +75,17 @@ const FullScreenItem = (props) => {
                             primary: classes.title,
                             secondary: classes.subtitle
                         }}
-                        primary={props.title} 
-                        secondary={props.date} 
+                        primary={title} 
+                        secondary={date} 
                         />
                 </Box>
                 <ListItemSecondaryAction>
                     <DialogNote 
                         open={open} 
                         handleClickClose={handleClickClose}
-                        title={props.title}
-                        message={props.message}
-                        date={props.date}
+                        title={title}
+                        message={message}
+                        date={date}
                     />
                 </ListItemSecondaryAction>
                 <ListItemSecondaryAction>

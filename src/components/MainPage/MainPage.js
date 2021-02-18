@@ -4,13 +4,51 @@ import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import useStyles from './styleProfile';
 import PropTypes from 'prop-types';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import Profile from './Profile/Profile';
 import Notes from './Notes/Notes';
 import { getAllNotes, addNote, deleteNote, setUserAvatar, 
     changeNickname, changeAvatar, deleteAvatar, getStats } from '../../redux/userReducer';
+
+
+const useStyles = theme => ({
+    root: {
+        flexGrow: 1,
+        [theme.breakpoints.down("sm")]: {
+            display: "block"
+        }
+    },
+    content: {
+        marginTop: theme.spacing(6),
+    },
+    paper: {
+        height: 140,
+    },
+    openDialogWindow: {
+        marginTop: theme.spacing(1),
+    },
+    profileInfo: {
+        paddingBottom: theme.spacing(12),
+        paddingLeft: theme.spacing(8),
+        paddingRight: theme.spacing(8),
+    },
+    avatar: {
+        height: theme.spacing(12),
+        width: theme.spacing(12),
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: theme.spacing(3),
+    },
+    avaName: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+})
+
+
+
 
 class MainPage extends React.Component {
     constructor(props) {
@@ -34,7 +72,7 @@ class MainPage extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, avatar, nickname, id, countNotes, dateLastNote, getStats } = this.props;
 
         return (
             <Container component="main" maxWidth="md" className={classes.root}>
@@ -43,16 +81,16 @@ class MainPage extends React.Component {
                     <Grid wrap="wrap" container spacing={2} direction="row" justify="center">
                         <Grid xs={12} sm={12} item md={12} lg={4}>
                             <Profile
-                                avatar={this.props.avatar}
-                                nickname={this.props.nickname}
-                                setUserAvatar={this.props.setUserAvatar}
-                                changeNickname={this.props.changeNickname}
-                                changeAvatar={this.props.changeAvatar}
-                                deleteAvatar={this.props.deleteAvatar}
-                                id={this.props.id}
-                                getStats={this.props.getStats}
-                                countNotes={this.props.countNotes}
-                                dateLastNote={this.props.dateLastNote}
+                                avatar={avatar}
+                                nickname={nickname}
+                                setUserAvatar={setUserAvatar}
+                                changeNickname={changeNickname}
+                                changeAvatar={changeAvatar}
+                                deleteAvatar={deleteAvatar}
+                                id={id}
+                                getStats={getStats}
+                                countNotes={countNotes}
+                                dateLastNote={dateLastNote}
                             />
                         </Grid>
                         <Grid xs={12} sm={12} item md={12} lg={8}>

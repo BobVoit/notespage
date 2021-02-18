@@ -24,36 +24,36 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const DialogNote = (props) => {
+const DialogNote = ({ open, handleClickClose, title, date, message }) => {
 
     const classes = useStyles();
 
     return (
         <Dialog 
-            open={props.open} 
-            onClose={props.handleClickClose} 
+            open={open} 
+            onClose={handleClickClose} 
             fullWidth
             aria-labelledby="about-note" 
             className={classes.root}
             maxWidth={"sm"}
         >
-            <DialogTitle className={classes.title} id="about-note">{props.title}</DialogTitle>
+            <DialogTitle className={classes.title} id="about-note">{title}</DialogTitle>
             <DialogContent>
                 <Box className={classes.dateWrapper}>
                     <Typography className={classes.dateTitle} variant="subtitle2">Дата:</Typography>
-                    <Typography>{props.date}</Typography>
+                    <Typography>{date}</Typography>
                 </Box>
                 <Divider />
                 <Box>
                     <Typography className={classes.dateTitle} variant="subtitle2">Заметка:</Typography>
                     <Box>
-                        <Typography className={classes.message}>{props.message}</Typography>       
+                        <Typography className={classes.message}>{message}</Typography>       
                     </Box> 
                     
                 </Box>
             </DialogContent>
             <DialogActions>
-                <Button size="large" className={classes.close} onClick={props.handleClickClose}>Close</Button>
+                <Button size="large" className={classes.close} onClick={handleClickClose}>Close</Button>
             </DialogActions>
         </Dialog>
     )

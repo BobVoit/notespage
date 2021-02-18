@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SignUpForm from './SignUpForm';
-import style from './SignUp.module.css';
 import { signUp, setSignUp } from '../../redux/userReducer';
 
 const SignUp = (props) => {
@@ -17,7 +16,7 @@ const SignUp = (props) => {
     }
 
     return (
-        <div className={style.signup__container}>
+        <div>
             <SignUpForm onSubmit={onSubmit} />
         </div>
     )
